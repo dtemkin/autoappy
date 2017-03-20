@@ -1,0 +1,12 @@
+Code	 ResponseStatus
+None	 "Error? Check Response Log"
+NR	 "No Response"
+DNR	 "Delinquent (14+ days), No Response"
+RNx	 "Response Received, No Interview/No Offer"
+RICNO	 "Response Received, Interview(s) (Completed) - No Offer"
+RICNR	 "Response Received, Interview(s) (Completed) - No Response"
+RICDNR	 "Response Received, Interview(s) (Completed) - Delinquent, No Response"
+RICO	 "Response Recieved, Interview(s) (Completed) - Offer"
+RIS	 "Response Recieved, Interview(s) (Scheduled)"
+RIRNN	 "Response Received, Interview(s) (Requested) - Not Scheduled"
+

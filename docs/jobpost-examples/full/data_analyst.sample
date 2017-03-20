@@ -1,0 +1,29 @@
+"Data Analyst",(Job:Title)
+
+"Overview",(Job:Overview:Header)
+
+"We are looking for a passionate certified Data Analyst. The successful candidate will turn data into information, information into insight and insight into business decisions.",(Job:Overview:0:["passionate","insight into business decisions"])
+
+"Job Duties",(Job:Responsibilities:Header)
+
+"Data analyst responsibilities include conducting full lifecycle analysis to include requirements, activities and design.",(Job:Responsibilities:0)
+"Data analysts will develop analysis and reporting capabilities.",(Job:Responsibilities:1)
+"They will also monitor performance and quality control plans to identify improvements.",(Job:Responsibilities:2)
+
+"Interpret data, analyze results using statistical techniques and provide ongoing reports",(Job:Responsibilities:3)
+"Develop and implement databases, data collection systems, data analytics and other strategies that optimize statistical efficiency and quality",(Job:Responsibilities:4)
+"Acquire data from primary or secondary data sources and maintain databases/data systems",(Job:Responsibilities:5)
+"Identify, analyze, and interpret trends or patterns in complex data sets",(Job:Responsibilities:6)
+"Filter and clean data by reviewing computer reports, printouts, and performance indicators to locate and correct code problems",(Job:Responsibilities:7)
+"Work with management to prioritize business and information needs",(Job:Responsibilities:8)
+"Locate and define new process improvement opportunities",(Job:Responsibilities:9)
+
+"Requirements",(Job:Requirements:Header)
+
+"Proven working experience as a data analyst or business data analyst",(Job:Requirements:0:Experience:0:["data analyst","business data analyst"])
+"Technical expertise regarding data models, database design development, data mining and segmentation techniques",(Job:Requirements:1:Experience:0:["eliciting requirements and testing"])
+"Strong knowledge of and experience with reporting packages (Business Objects etc), databases (SQL etc), programming (XML, Javascript, or ETL frameworks)",(Job:Requirements:2:Skills:"strong":["Business Objects","SQL","XML","Javascript","ETL frameworks"])
+"Knowledge of statistics and experience using statistical packages for analyzing datasets,(Excel, SPSS, SAS etc)",(Job:Requirements:2:Skills:0:["Analyzing datasets","statistics","Excel","SAS","SPSS"])
+"Strong analytical skills with the ability to collect, organize, analyze, and disseminate significant amounts of information with attention to detail and accuracy",(Job:Requirements:2:Skills:"normal":["analytical skills","collect","organize","analyze","attention to detail","accuracy"])
+"Adept at queries, report writing and presenting findings",(Job:Requirements:2:Skills:"normal":["queries","report writing","findings"])
+"BS in Mathematics, Economics, Computer Science, Information Management or Statistics",(Job:Requirements:1:Education:BS:["Economics","Statistics","Information Management","Mathematics","Computer Science"])

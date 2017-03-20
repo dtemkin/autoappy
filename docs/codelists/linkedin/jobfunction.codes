@@ -1,0 +1,28 @@
+Analytics code	Targeting code	Description
+-1	 	None
+1	acct	Accounting
+2	admn	Administrative
+3	cre	Arts and Design
+4	bd	Business Development
+5	css	Community & Social Services
+6	cnsl	Consulting
+7	edu	Education
+8	eng	Engineering
+9	ent	Entrepreneurship
+10	finc	Finance
+11	med	Healthcare Services
+12	hr	Human Resources
+13	it	Information Technology
+14	lgl	Legal
+15	mktg	Marketing
+16	pr	Media & Communications
+17	mps	Military & Protective Services
+18	ops	Operations
+19	prod	Product Management
+20	ppm	Program & Product Management
+21	buy	Purchasing
+22	qa	Quality Assurance
+23	re	Real Estate
+24	acad	Rersearch
+25	sale	Sales
+26	supp	Support

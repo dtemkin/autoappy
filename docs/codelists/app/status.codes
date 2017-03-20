@@ -1,0 +1,8 @@
+Code	AppStatus
+Sxx	"Submitted App (Resume & Coverletter)"
+Sx1	"Submitted App (Resume Only)"
+Sx2	"Error? Verify Application Receipt"
+Sx+	"Submitted App (Resume, Coverletter and Other Docs)"
+NS	"Not Submitted"
+NSP	"Not Submitted, Partial"
+xNSFx	"Error? Generic: By Golly I Think He's Dead..."

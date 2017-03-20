@@ -1,0 +1,27 @@
+"Business Analyst",(Job:Title)
+
+
+"Job brief",(Job:Overview:Header)
+
+"We are looking for a Business Analyst who will be the vital link between our information technology capacity and our business objectives by supporting and ensuring the successful completion of analytical, building, testing and deployment tasks of our software product’s features.",(Job:Overview:0:["be the vital link","supporting and ensuring completion"])
+
+"Responsibilities",(Job:Responsibilities:Header)
+
+"Define configuration specifications and business analysis requirements",(Job:Responsibilities:0)
+"Perform quality assurance",(Job:Responsibilities:1)
+"Define reporting and alerting requirements",(Job:Responsibilities:2)
+"Own and develop relationship with partners, working with them to optimize and enhance our integration",(Job:Responsibilities:3)
+"Help design, document and maintain system processes",(Job:Responsibilities:4)
+"Report on common sources of technical issues or questions and make recommendations to product team",(Job:Responsibilities:5)
+"Communicate key insights and findings to product team (Job:Responsibilities:6)
+Constantly be on the lookout for ways to improve monitoring, discover issues and deliver better value to the customer",(Job:Responsibilities:7)
+
+"Requirements",(Job:Requirements:Header)
+
+"Previous experience in Business / Systems Analysis or Quality Assurance",(Job:Requirements:0:Experience:0:["Business and Systems Analysis","Quality Assurance"])
+"A degree in IT / Computer Science",(Job:Requirements:1:Education::IT)
+"Proven experience in eliciting requirements and testing",(Job:Requirements:2:Experience:0:["eliciting requirements and testing"])
+"Experience in analysing data to draw business-relevant conclusions and in data visualization techniques and tools",(Job:Requirements:3:Experience:0:["analysing data","business-relevant conclusions","data visualization"])
+"Solid experience in writing SQL queries",(Job:Requirements:4:Experience:"solid":["writing SQL queries"])
+"Basic knowledge in generating process documentation",(Job:Requirements:5:Knowledge:"basic":["process documentation"])
+"Strong written and verbal communication skills including technical writing skills",(Job:Requirements:6:Skills:"strong":["communication","technical writing"])

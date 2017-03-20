@@ -1,7 +1,6 @@
-from mcjobs.utils import fullpath
-import requests
-from mcjobs.API import muse, careerbuilder, indeed
+from mcjobs.API import muse, indeed
 
+from API import careerbuilder
 
 
 class Data(object):

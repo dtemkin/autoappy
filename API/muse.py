@@ -1,8 +1,10 @@
-import requests
-from mcjobs.API.base import Source, Filters
-from mcjobs.text.base import Text
-from urllib.parse import urlencode
 from time import sleep
+from urllib.parse import urlencode
+
+import requests
+
+from API.base import Source, Filters
+from mcjobs.text.base import Text
 
 x = Source()
 x.source = "muse"

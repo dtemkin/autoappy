@@ -1,10 +1,9 @@
-
-from mcjobs.API.base import Source, filter_mgmt, filter_recruiters
-from mcjobs.text.base import Text
-import json
 from datetime import date
+
 import requests
 
+from API.base import Source
+from mcjobs.text.base import Text
 
 x = Source()
 x.source = "careerbuilder"

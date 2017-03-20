@@ -7,7 +7,7 @@ test/posts-careerbuilder.csv
 test/searchdata-careerbuilder.csv
 test/posts-indeed.csv
 test/searchdata-indeed.csv
-mcjobs/API/__pycache__/
+API/__pycache__/
 mcjobs/__pycache__/
 mcjobs/text/__pycache__/
 defaults.ini

@@ -4,10 +4,9 @@ Created on Dec 12, 2016
 @author: dysmas
 '''
 
-from mcjobs.API.Job import Search, Info
-from mcjobs.utils import fullpath
-
 from pprint import PrettyPrinter
+
+from API.Job import Search, Info
 
 
 

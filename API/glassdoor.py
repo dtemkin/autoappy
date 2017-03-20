@@ -4,10 +4,9 @@ Created on Jan 20, 2017
 @author: dysmas
 '''
 
-
-from mcjobs.utils import fullpath
-from mcjobs.API.base import Source
 import requests
+
+from API.base import Source
 
 x = Source()
 x.source = "glassdoor"

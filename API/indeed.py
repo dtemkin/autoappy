@@ -1,11 +1,14 @@
 from __future__ import unicode_literals, print_function
+
+from datetime import date
+
 import numpy as np
 import requests
 from bs4 import BeautifulSoup as bsoup
-from mcjobs.API.base import Source, filter_mgmt, filter_recruiters
+
+from API.base import Source
 from mcjobs.text.base import Text
 from mcjobs.utils import fullpath
-from datetime import date
 
 defaultargs = dict(v=2, format="json", limit=25, fromage=7,
                    radius="50", jt="fulltime", st="employer",

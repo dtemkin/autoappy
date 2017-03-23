@@ -100,9 +100,18 @@ class Text(Document):
             return True
         elif incl_geo is True and str(x).lower() in [g.lower() for g in geostops]:
             return True
+        elif 10 < len(str(x).lower()) < 3:
+            return True
         else:
-            return str(x)
+            return False
 
+    @classmethod
+    def in_dictionary(self, j):
+        ws = open(fullpath("../docs/keywords/master_dict.ls"), mode="r", newline="\n")
+        if str(j).lower() in [w.lower() for w in ws]:
+            return str(j)
+        else:
+            return None
 
     def _wash_me(self, text):
         text = html.unescape(text)
@@ -126,13 +135,13 @@ class Text(Document):
         text = re.sub("\n\n", "", text)
         text = re.sub("\n", "", text)
         text = re.sub("•", "\n", text)
-        text = re.sub("&", "and", text)
+        text = re.sub("&", " and ", text)
         text = re.sub("\xa0", "", text)
         text = re.sub("/", "", text)
         text = re.sub("\r\n", " ", text)
         text = re.sub("\(", "", text)
         text = re.sub("\)", "", text)
-        text = re.sub("i.e.", "like,", text)
+        text = re.sub("i\.e\.", " like ", text)
         text = re.sub("jr", "junior", text, re.IGNORECASE)
         text = re.sub("jr.", "junior", text, re.IGNORECASE)
         text = re.sub("sr", "senior", text, re.IGNORECASE)
@@ -143,28 +152,17 @@ class Text(Document):
 
 
     @classmethod
-    def token_filter(self, words):
-        wordtokens = []
-        tokens = []
-        for token in words:
-            if self.is_stop(token.lower()) is True or int(token.lower().find(".")) > -1 or len(token) < 3:
-                pass
+    def token_filter(self, token):
+
+        if self.is_stop(x=token.lower()) is True or int(token.lower().find(".")) > -1:
+            return None
+        elif len(token) < 3:
+            w = self.in_dictionary(j=token)
+            if w is not None:
+                return w
             else:
-                if len(token) > 11:
-                    wordtokens.extend([word.lower() for word in self.xsplit(token)])
-                elif any(list(token)) in list(string.ascii_uppercase):
-                    ngrams = [a for a in re.split('([A-Z][a-z]*)', token) if a]
-                    wordtokens.extend([gram.lower() for gram in ngrams])
-                elif any(list(token)) in list(string.digits) or any(list(token)) in list(string.punctuation):
-                    wordtokens.append("".join([i for i in token.lower() if i.isalpha()]))
-                else:
-                    wordtokens.append(token.lower())
-        for w in wordtokens:
-            if len(w) > 11:
-                tokens.extend([i.strip() for i in self.xsplit(w)])
-            else:
-                tokens.append(w.strip())
-        return tokens
+                return None
+
 
     @property
     def sents(self):
@@ -180,21 +178,49 @@ class Text(Document):
     @property
     def keywords(self):
         doc = nlp(self._wash_me(self.doctext))
-        twords_START = time()
-        try:
-            tokens = [sent.string.strip() for sent in doc]
-        except TypeError:
-            words = ""
-            pass
-        else:
-            words = self.token_filter(words=tokens)
-
-        print("Word Tokenizer took %s seconds" % (round(time() - twords_START, 2)))
-
-        return words
+        props = []
+        for w in range(len(doc)):
+            if doc[w].pos_ in ["DET","CONJ","ADP","X","PRON","PRP","SPACE","PUNCT"]:
+                pass
+            elif doc[w].tag_ in ["PRP$"]:
+                pass
+            elif doc[w].string.strip() in list(string.digits + string.punctuation + string.whitespace):
+                pass
+            elif self.is_stop(x=doc[w].string.strip()) is True:
+                pass
+            else:
+                token_props = {}.fromkeys(["_id", "token", "tokenlc", "ortho", "clusterID", "log_prob", "lemma", "tag", "pos"])
+                token_props["_id"] = w
+                token_props["token"] = doc[w].string.strip()
+                token_props["tokenlc"] = doc[w].lower_.strip()
+                token_props["ortho"] = doc[w].orth_
+                token_props["clusterID"] = doc[w].cluster
+                token_props["log_prob"] = doc[w].prob
+                token_props["tag"] = doc[w].tag_
+                token_props["lemma"] = doc[w].lemma_
+                token_props["pos"] = doc[w].pos_
+                props.append(token_props)
+        return props
 
     def __call__(self):
         return self._wash_me(self.doctext)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 class Elements(Text):

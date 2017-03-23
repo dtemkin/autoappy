@@ -32,7 +32,7 @@ def _rebuild_search_fields(dct):
 
     return d
 
-def Search(terms, loc, params, typ="JobTitle"):
+def Search(terms, loc, typ="JobTitle", **params):
     '''
 
     JobTitle : str or list of strings (show jobs with set or similar Job Title)
@@ -77,7 +77,7 @@ def Search(terms, loc, params, typ="JobTitle"):
     x.apitype = "job"
     x.endpoint = "search"
     results = []
-    pay = params
+    pay = dict(**params)
     pay.update({typ: terms, "Location":loc, "PageNumber":0})
     pay.update(defaultargs)
     req = request_session.get(x.url, params=pay)
@@ -165,7 +165,7 @@ def Post(datadict, _id):
 
     txt = Text(" ".join([resp["JobRequirements"], resp["JobDescription"]]))
 
-    resp.update({"summary":txt(), "tokens": txt.keywords, "lines": txt.sents, "source":x.source})
+    resp.update({"summary":txt(), "tokens": txt.keywords, "lemmas" "lines": txt.sents, "source":x.source})
 
     del resp["JobRequirements"]
     del resp["JobDescription"]

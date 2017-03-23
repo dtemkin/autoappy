@@ -24,7 +24,7 @@ request_session = requests.Session()
 request_session.headers.update(x.config["common"]["request"]["headers"])
 request_session.params.update(x.authdict)
 
-def Search(terms, loc, params):
+def Search(terms, loc, **params):
     """
     :param params:
     :terms str:
@@ -75,7 +75,7 @@ def Search(terms, loc, params):
     x.apitype = "job"
     x.endpoint = "search"
     results = []
-    pay = dict(params)
+    pay = dict(**params)
 
     pay.update({"terms": terms})
 

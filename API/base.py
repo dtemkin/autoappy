@@ -27,8 +27,8 @@ class Filters(object):
                         "chief", "executive","mgr","technician"]
         y = 0
         for mgmt_word in mgmtkeywords:
-            m = re.compile(mgmt_word)
-            if m.search(self.datadict["jobtitle"].lower()) > -1:
+
+            if self.datadict["jobtitle"].lower().find(mgmt_word, 0, len(self.datadict["jobtitle"])) > -1:
                 y += 1
             else:
                 pass
@@ -62,14 +62,22 @@ class Filters(object):
             return True
 
     def title(self, title_strings, partial=True):
-        if self.datadict["jobtitle"].lower().lower().find(" ".join(title_strings), 0, len(self.datadict["jobtitle"])) > -1:
+        t = 0
+        if self.datadict["jobtitle"].lower().find(title_strings.replace("+", " ").lower(), 0, len(self.datadict["jobtitle"])) > -1:
             return True
         elif partial is True:
-            for s in title_strings:
-                if self.datadict["jobtitle"].lower().find(s, 0, len(self.datadict["jobtitle"])) > -1:
-                    return True
+            strings = title_strings.split("+")
+
+            for s in strings:
+                if self.datadict["jobtitle"].lower().find(s.lower()) > -1:
+                    t += 1
                 else:
                     pass
+            if t > 1:
+                return True
+            else:
+                return False
+
         else:
             return False
 
@@ -117,32 +125,6 @@ class Source:
     def url(self):
         return self.config["source"][self.source][self.apitype][self.endpoint]
 
-    def stops_list(self, lvl, company, jobtitle, incl_geoloc=True):
-        stopslst = []
-        stops_dir_dict = dict(strict=fullpath("../docs/keywords/stops/665-words.ls"),
-                              normal=fullpath("../docs/keywords/stops/543-words.ls"),
-                              limited=fullpath("../docs/keywords/stops/285-words.ls"))
-
-        if " " in str(company).lower():
-            stopslst.extend([i.lower().replace(".", " ") for i in str(company).split(" ")])
-        else:
-            stopslst.append(str(company).lower())
-        if " " in str(jobtitle).lower():
-            stopslst.extend([i.lower().replace("-", "") for i in str(jobtitle).split(" ")])
-        else:
-            stopslst.append(str(jobtitle).lower())
-
-        stops = open(stops_dir_dict[lvl], mode="r").read()
-        stopslst.extend([x.lower() for x in stops.split("\n")])
-
-        if incl_geoloc is True:
-            usgeo_stops = open(fullpath("../docs/keywords/stops/usgeo.ls"), mode="r").read()
-            stopslst.extend([x.lower() for x in usgeo_stops.split("\n")])
-
-
-        else:
-            pass
-        return stopslst
 
     def _dupe_check(self, collection, valdict, **connkwargs):
         host, port = connkwargs.get("hosts", "127.0.0.1"), connkwargs.get("port", 27017)

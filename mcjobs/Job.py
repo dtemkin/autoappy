@@ -1,6 +1,5 @@
-from mcjobs.API import muse, indeed
 
-from API import careerbuilder
+from API import careerbuilder, muse, indeed
 
 
 class Data(object):
@@ -35,7 +34,7 @@ class CodeReference(object):
 
 class Search(Data):
 
-    def __init__(self, terms, loc, **clsparams):
+    def __init__(self, terms, loc):
         super(Search, self).__init__()
         self.endpoint = "search"
         self.loc = loc
@@ -46,40 +45,28 @@ class Search(Data):
         else:
             self.terms = str(terms)
 
-        self._params_parser(params=dict(**clsparams))
 
-        self.cb_params, self.in_params, self.muse_params = {}, {}, {}
 
-    def _params_parser(self, params):
-        if "muse" in params:
-            self.muse_params.update(params["muse"])
-
-        if "careerbuilder" in params:
-            self.cb_params.update(params["careerbuilder"])
-
-        if "indeed" in params:
-            self.in_params.update(params["indeed"])
-
-    def Careerbuilder(self):
+    def Careerbuilder(self, **kwargs):
         print("Searching Careerbuilder...")
         self.source = "careerbuilder"
-        results = careerbuilder.Search(terms=self.terms, loc=self.loc, params=self.cb_params)
+        results = careerbuilder.Search(terms=self.terms, loc=self.loc, **kwargs)
         print("Careerbuilder: Found %s rows" % len(results))
         self.data["SearchResults"].extend(results)
         print("Careerbuilder: Search Done.")
 
-    def Indeed(self):
+    def Indeed(self, **kwargs):
         print("Searching Indeed...")
         self.source = "indeed"
-        results = indeed.Search(terms=self.terms, loc=self.loc, params=self.in_params)
+        results = indeed.Search(terms=self.terms, loc=self.loc, **kwargs)
         print("Indeed: Found %s rows" % len(results))
         self.data["SearchResults"].extend(results)
         print("Indeed: Search Done.")
 
-    def Muse(self):
+    def Muse(self, **kwargs):
         print("Searching Muse...")
         self.source = "muse"
-        results = muse.Search(terms=self.terms, location=self.loc, params=self.muse_params)
+        results = muse.Search(terms=self.terms, location=self.loc, **kwargs)
         print("Muse: Found %s rows" % len(results))
         self.data["SearchResults"].extend(results)
         print("Muse: Search Done.")

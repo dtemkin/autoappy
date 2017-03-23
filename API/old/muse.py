@@ -10,33 +10,15 @@ x = Source()
 x.source = "muse"
 
 request_session = requests.Session()
-header = {"Content-Type": "application/json; charset=UTF-8"}
-header = header.update(dict(**x.head))
 
-request_session.headers.update(header)
-request_session.params.update(x.authdict)
+request_session.headers.update(dict(**x.head))
+request_session.headers.update(dict(**x.authdict))
 
 
-def url_extension(kwargs):
-    stringparts = []
-    for k in kwargs.keys():
-        if type(kwargs[k]) is list:
-            for i in kwargs[k]:
-                kk = i.replace(" ", "+")
-                stringparts.append((str(k), str(kk)))
-        else:
-            kk = kwargs[k].replace(" ", "+")
-            stringparts.append((str(k), str(kk)))
-
-    return urlencode(stringparts)
-
-
-
-def Search(terms, **params):
+def Search(terms, location, **kwargs):
     '''
-
-    :param terms:
-    :params location:
+    :terms:
+    :location:
     :params company:
     :params category:
     :params jobtype:
@@ -44,44 +26,71 @@ def Search(terms, **params):
     '''
     x.apitype = "job"
     x.endpoint = "search"
-
+    baseparams = dict(page=0)
+    jt = kwargs.get("jobtype")
+    cat = kwargs.get("category", ["Data Science"])
     results = []
-
-    params = dict(**params)
-    if "jobtype" in [k for k in params.keys()]:
-        params.update({"level":params["jobtype"]})
-        del params["jobtype"]
-
-    ext = url_extension(kwargs=params)
-    url = "".join([x.url, ext])
+    params = []
 
 
-    payload = dict(page=0, keywords=" ".join(terms))
+    if type(jt) is str:
+        params.append(("level", jt))
+
+    elif type(jt) is list:
+        for j in jt:
+            params.append(("level", j))
 
 
-    req1 = request_session.get(url, params=payload, stream=True)
+    if type(location) is list:
+        for l in location:
+            params.append(("location", l))
+    else:
+        params.append(("location",location))
 
+    if type(cat) is None:
+        pass
+    elif type(cat) is list:
+        for c in cat:
+            params.append(("category", c))
+    elif type(cat) is str:
+        params.append(("category", cat))
+
+    url = "".join([x.url, urlencode(params)])
+
+    req1 = request_session.get(url, params=baseparams, stream=True)
+    print(req1.url)
     js = req1.json()
     for g in js["results"]:
         result = fix_results(g)
+
         Filter = Filters(result)
         if Filter.mgmt() is False:
             pass
-        elif Filter.title(title_strings=terms, partial=True) is False:
-            pass
-        else:
+        elif Filter.title(title_strings=terms, partial=True) is True:
             results.append(result)
 
+
     for i in range(1, js["page_count"]):
-        pay = payload
+        pay = baseparams
         pay.update({"page":i})
-        req2 = request_session.get(x.url, params=pay, stream=False)
+        urlx = "".join([x.url, urlencode(params)])
+
+        req2 = request_session.get(urlx, params=pay,  stream=False)
         sleep(0.5)
         jsx = req2.json()
 
         for h in jsx["results"]:
-            result = fix_results(h)
-            results.append(result)
+
+            resultx = fix_results(h)
+            Filter = Filters(resultx)
+            if Filter.mgmt() is False:
+                pass
+            else:
+                if Filter.title(title_strings=terms, partial=True) is False:
+                    pass
+                else:
+
+                    results.append(resultx)
         print(i, "of", js["page_count"])
     return results
 
